@@ -1,2 +1,1 @@
-document.body.style.border = "50px solid red";
-document.title="Rushikesh"
+console.log("ImageDownloader.js Script");
