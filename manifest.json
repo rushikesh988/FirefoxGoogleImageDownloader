@@ -1,0 +1,30 @@
+{
+    
+      "manifest_version": 2,
+      "name": "Google Images Downloader",
+      "version": "1.0",
+    
+      "description": "Downloads full sized images in Google Images Windows.",
+    
+      "icons": {
+        "48": "icons/icon48.png",
+        "96": "icons/icon96.png"
+      },
+
+
+      "applications": {
+        "gecko": {
+           "id": "mycoolextension@mycoolextension.com"
+        }
+     },
+
+
+      "content_scripts": [
+        {
+          //"matches": ["*://*.google.*"],
+          "matches":  ["*://*/"],
+          "js": ["imageDownloader.js"]
+        }
+      ]
+    
+    }
