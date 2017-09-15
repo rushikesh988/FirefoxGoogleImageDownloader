@@ -1,5 +1,4 @@
 {
-    
       "manifest_version": 2,
       "name": "Google Images Downloader",
       "version": "1.0",
@@ -11,17 +10,25 @@
         "96": "icons/icon96.png"
       },
 
+      "permissions": [
+        "activeTab"
+      ],
+
+      "browser_action": {
+        "default_icon": "icons/icon32.png",
+        "default_title": "Google Image Downloader",
+        "default_popup": "popups/sucessfullyInstalled.html"
+      },
 
       "applications": {
         "gecko": {
-           "id": "mycoolextension@mycoolextension.com"
+           "id": "rushikesh988@gmail.com"
         }
      },
 
 
       "content_scripts": [
         {
-          //"matches": ["*://*.google.*"],
           "matches":  ["*://*/"],
           "js": ["imageDownloader.js"]
         }
