@@ -1,19 +1,4 @@
-/*
-Given the name of a beast, get the URL to the corresponding image.
-*/
-function beastNameToURL(beastName) {
-  switch (beastName) {
-    case "Frog":
-      console.log("in Frog")
-      return browser.extension.getURL("beasts/frog.jpg");
-    case "Snake":
-    console.log("in Snake")
-      return browser.extension.getURL("beasts/snake.jpg");
-    case "Turtle":
-    console.log("in Turtle")
-      return browser.extension.getURL("beasts/turtle.jpg");
-  }
-}
+
 
 /*
 Listen for clicks in the popup.
@@ -29,17 +14,20 @@ If it's on a button wich contains class "clear":
   Close the popup. This is needed, as the content script malfunctions after page reloads.
 */
 document.addEventListener("click", (e) => {
+  console.log("in on Click Listner")
   if (e.target.classList.contains("beast")) {
     var chosenBeast = e.target.textContent;
-    var chosenBeastURL = beastNameToURL(chosenBeast);
-
+    console.log("Going for execution of script")
     browser.tabs.executeScript(null, {
       file: "imageDownloader.js"
     });
 
     var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
+    console.log("Received gettingActiveTab" )
     gettingActiveTab.then((tabs) => {
-      browser.tabs.sendMessage(tabs[0].id, {beastURL: chosenBeastURL});
+      console.log("sending gettingActiveTab sendmessage" )
+      browser.tabs.sendMessage(tabs[0].id, {beastURL: "http://www.yahoo.co.in"});
+      console.log("sent gettingActiveTab sendmessage" )
     });
   }
   else if (e.target.classList.contains("clear")) {

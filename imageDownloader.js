@@ -1,2 +1,2 @@
-document.body.style.border = "5px solid red";
+document.body.style.border = "50px solid red";
 document.title="Rushikesh"
