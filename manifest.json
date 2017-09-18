@@ -11,8 +11,10 @@
       },
 
       "permissions": [
+        "notifications",
         "activeTab",
-        "unlimitedStorage"
+        "unlimitedStorage",
+        "downloads"
       ],
 
       "browser_action": {
