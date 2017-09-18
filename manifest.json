@@ -1,15 +1,19 @@
 {
       "manifest_version": 2,
       "name": "Google Images Downloader",
+      "author": "Rushikesh Tade",
+      "developer": {
+        "name": "Rushikesh Tade",
+        "url": "https://github.com/rushikesh988/"
+      },
       "version": "1.0",
-    
       "description": "Downloads full sized images in Google Images Windows.",
-    
+      "homepage_url": "https://github.com/rushikesh988/FirefoxGoogleImageDownloader",
       "icons": {
         "48": "icons/icon48.png",
         "96": "icons/icon96.png"
       },
-
+      
       "permissions": [
         "activeTab",
         "downloads"
@@ -17,8 +21,7 @@
 
       "browser_action": {
         "default_icon": "icons/icon32.png",
-        "default_title": "Google Image Downloader",
-        "default_popup": "popups/sucessfullyInstalled.html"
+        "default_title": "Google Image Downloader"
       },
 
       "applications": {
@@ -27,12 +30,5 @@
         }
      },
 
-
-      "content_scripts": [
-        {
-          "matches":  ["*://*/"],
-          "js": ["imageDownloader.js"]
-        }
-      ]
-    
+     "background": { "scripts": ["imageDownloader.js"] }
     }
