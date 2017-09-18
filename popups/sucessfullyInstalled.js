@@ -47,6 +47,7 @@ function onLinksFailed(error) {
 document.addEventListener("click", (e) => { 
   console.log("in on Click Listner")
   if (e.target.classList.contains("beast")) {
+
   var aray=browser.tabs.executeScript({
       file: "../downloader.js"
     });
