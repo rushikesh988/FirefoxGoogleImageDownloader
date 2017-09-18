@@ -1,5 +1,24 @@
 var titleName="";
+var titlePromiseExecuted=false;
 
+function onGot(tabInfo) {
+  console.log(tabInfo);
+}
+
+function onError(error) {
+  console.log(`Error: ${error}`);
+}
+
+function onSuccessfullTitleFetch(title) {
+  console.log(`Started downloading: ${title}`);
+  titleName=title;
+  titlePromiseExecuted=true;
+}
+
+function onFailedTitleFetch(error) {
+  console.log(`Download failed: ${error}`);
+  titlePromiseExecuted=true;
+}
 
 function onStartedDownload(id) {
   console.log(`Started downloading: ${id}`);
@@ -22,7 +41,7 @@ function onLinksReceived(downloadLinks) {
      var fileNameString=dashSplitString[dashSplitString.length-1]
      var extensionString=fileNameString.split(".")
      extensionString= extensionString[extensionString.length-1]
-     var fileNameToStore="Google Images"+"/"+i;
+     var fileNameToStore=titleName+"/"+i;
      if ((extensionString=="jpg") ||( extensionString == "bmp") || ( extensionString == "jpeg") ||( extensionString == "gif") || ( extensionString == "png") || ( extensionString == "ico") ||( extensionString == "svg"))
      {
       fileNameToStore=fileNameToStore+ "."+ extensionString;
@@ -33,11 +52,10 @@ function onLinksReceived(downloadLinks) {
      }
 
      if(i>10){
-       break;
+       break; 
        return;
      }
-     //todo 
-     //Add extension 
+
 
       var downloading =this.browser.downloads.download({
         url : downloadLinks[0][i],
@@ -56,17 +74,28 @@ function onLinksFailed(error) {
 document.addEventListener("click", (e) => { 
   console.log("in on Click Listner")
   if (e.target.classList.contains("beast")) {
-    var chosenBeast = e.target.textContent;
-    titleName=browser.tabs.executeScript({
-      file: "../gettitle.js"
-    });
+    // var chosenBeast = e.target.textContent;
+  // var  titleGetScript=browser.tabs.executeScript({
+  //     file: "../gettitle.js"
+  //   });
 
+  //   titleGetScript.then(onSuccessfullTitleFetch,onFailedTitleFetch)
+  // while(!titlePromiseExecuted){
 
-   var aray=browser.tabs.executeScript({
-      file: "../downloader.js"
-    });
-   aray.then(onLinksReceived, onLinksFailed);
+  // }
+
   
+  var gettingCurrent = browser.tabs.getCurrent();
+  gettingCurrent.then(onGot, onError);
+
+
+  console.log( titleName); return;
+
+  // var aray=browser.tabs.executeScript({
+  //     file: "../downloader.js"
+  //   });
+  //  aray.then(onLinksReceived, onLinksFailed);
+
     }
   else if (e.target.classList.contains("clear")) {
     browser.tabs.reload();
