@@ -11,10 +11,7 @@
       },
 
       "permissions": [
-        "notifications",
         "activeTab",
-        "tabs",
-        "unlimitedStorage",
         "downloads"
       ],
 
