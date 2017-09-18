@@ -1,3 +1,6 @@
+var titleName="";
+
+
 function onStartedDownload(id) {
   console.log(`Started downloading: ${id}`);
 }
@@ -15,9 +18,31 @@ function onLinksReceived(downloadLinks) {
 
   while(++i<downloadLinks[0].length){
       console.log(downloadLinks[0][i])
+     var dashSplitString=downloadLinks[0][i].split("/")
+     var fileNameString=dashSplitString[dashSplitString.length-1]
+     var extensionString=fileNameString.split(".")
+     extensionString= extensionString[extensionString.length-1]
+     var fileNameToStore="Google Images"+"/"+i;
+     if ((extensionString=="jpg") ||( extensionString == "bmp") || ( extensionString == "jpeg") ||( extensionString == "gif") || ( extensionString == "png") || ( extensionString == "ico") ||( extensionString == "svg"))
+     {
+      fileNameToStore=fileNameToStore+ "."+ extensionString;
+      console.log("fileNameToStore is"+ fileNameToStore);
+     }
+     else{
+      continue;
+     }
+
+     if(i>10){
+       break;
+       return;
+     }
+     //todo 
+     //Add extension 
+
       var downloading =this.browser.downloads.download({
         url : downloadLinks[0][i],
-        conflictAction : 'uniquify'
+        conflictAction : 'uniquify',
+        filename: fileNameToStore
       });
       downloading.then(onStartedDownload, onFailed);
 
@@ -32,12 +57,15 @@ document.addEventListener("click", (e) => {
   console.log("in on Click Listner")
   if (e.target.classList.contains("beast")) {
     var chosenBeast = e.target.textContent;
-   
+    titleName=browser.tabs.executeScript({
+      file: "../gettitle.js"
+    });
+
+
    var aray=browser.tabs.executeScript({
       file: "../downloader.js"
     });
-
-    aray.then(onLinksReceived, onLinksFailed);
+   aray.then(onLinksReceived, onLinksFailed);
   
     }
   else if (e.target.classList.contains("clear")) {
