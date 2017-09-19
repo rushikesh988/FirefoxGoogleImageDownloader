@@ -6,12 +6,14 @@
         "name": "Rushikesh Tade",
         "url": "https://github.com/rushikesh988/"
       },
-      "version": "1.0",
+      "version": "2.0",
       "description": "Downloads full sized images in Google Images Windows.",
       "homepage_url": "https://github.com/rushikesh988/FirefoxGoogleImageDownloader",
       "icons": {
         "48": "icons/icon48.png",
-        "96": "icons/icon96.png"
+        "96": "icons/icon96.png",
+        "64": "icons/icon64.png",
+        "32": "icons/icon32.png"
       },
       
       "permissions": [
