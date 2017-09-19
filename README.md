@@ -8,5 +8,5 @@ An Extension to download images from Google Images.
 </br>
 **Rushikesh Tade** </br>
 [rushikesh988@gmail.com](mailto:rushtade@in.ibm.com) </br>
-[IBM Github Profile](https://github.ibm.com/rushtade) </br>
+[Github Profile](https://github.com/rushikesh988) </br>
 [Linkedin](https://www.linkedin.com/in/rushikesh988/) </br>
