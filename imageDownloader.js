@@ -27,12 +27,14 @@ function onStartedDownload(id) {
         //console.log(downloadLinks[0][i])
        var dashSplitString=downloadLinks[0][i].split("/")
        var fileNameString=dashSplitString[dashSplitString.length-1]
+       console.log(fileNameString);
        var extensionString=fileNameString.split(".")
        extensionString= extensionString[extensionString.length-1]
        var fileNameToStore="Google Images"+"/"+ dateTime+"/"+i;
        if ((extensionString=="jpg") ||( extensionString == "bmp") || ( extensionString == "jpeg") ||( extensionString == "gif") || ( extensionString == "png") || ( extensionString == "ico") ||( extensionString == "svg"))
        {
-        fileNameToStore=fileNameToStore+ "."+ extensionString;
+        //fileNameToStore=fileNameToStore+ "."+ extensionString;
+        fileNameToStore=fileNameToStore+ "_"+ fileNameString;
         //console.log("fileNameToStore is"+ fileNameToStore);
        }
        else{
