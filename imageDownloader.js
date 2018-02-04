@@ -45,10 +45,11 @@ function onLinksReceived(downloadLinks) {
     var seperatorString = "\n";
     if (storedSettings.AppendComma) {
       seperatorString = ",";
+      if (storedSettings.entryOnNewLine) {
+        seperatorString = seperatorString + "\n";
+      }
     }
-    if (storedSettings.entryOnNewLine) {
-      seperatorString = seperatorString + "\n";
-    }
+   
   
     var imgURLsString = "";
     while (++i < downloadLinks[0].length) {
