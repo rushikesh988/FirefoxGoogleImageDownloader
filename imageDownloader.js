@@ -57,7 +57,7 @@ function onLinksReceived(downloadLinks) {
       var fileNameString = dashSplitString[dashSplitString.length - 1];
       var extensionString = fileNameString.split(".");
       extensionString = extensionString[extensionString.length - 1];
-      var fileNameToStore = "Google Images" + "/" + searchTitle + "_" + dateTime + "/" + (i - j);
+      var fileNameToStore = "Google Images" + "/" + searchTitle + " " + dateTime + "/" + (i - j);
       if ((extensionString == "jpg") || (extensionString == "bmp") || (extensionString == "jpeg") || (extensionString == "gif") || (extensionString == "png") || (extensionString == "ico") || (extensionString == "svg")) {
         if (storedSettings.appendFileNames) {
           fileNameToStore = fileNameToStore + "_" + fileNameString;
@@ -82,7 +82,7 @@ function onLinksReceived(downloadLinks) {
       }
     }
     if ((storedSettings.downloadOption == 1) || (storedSettings.downloadOption == 2)) {
-      var URLsFileName = "Google Images" + "/" + searchTitle + "_" + dateTime + "/" + "Links.txt";
+      var URLsFileName = "Google Images" + "/" + searchTitle + " " + dateTime + "/" + "Links.txt";
       imgURLsString = imgURLsString.substring(0, imgURLsString.length - seperatorString.length);
       var blob = new Blob([imgURLsString], {
         type: 'text/plain'
