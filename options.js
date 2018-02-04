@@ -21,26 +21,22 @@ function BothRadioCallBack() {
 
 function saveOptions(e) {
   e.preventDefault();
-  console.log( document.querySelector('input[name="downloadOption"]:checked').value);
-  console.log( document.querySelector("#appendFileNames").checked);
-  console.log(document.querySelector("#continuesNumbering").checked);
-  console.log(document.querySelector("#AppendComma").checked);
-  console.log(document.querySelector("#entryOnNewLine").checked);
-
-
-  browser.storage.local.set({
+  var settingsToStore={
     downloadOption: document.querySelector('input[name="downloadOption"]:checked').value,
     appendFileNames: document.querySelector("#appendFileNames").checked,
     continuesNumbering: document.querySelector("#continuesNumbering").checked,
     AppendComma: document.querySelector("#AppendComma").checked,
     entryOnNewLine: document.querySelector("#entryOnNewLine").checked
-  });
+  }
+ 
+  console.log(settingsToStore);
+  browser.storage.local.set(settingsToStore);
 
 }
 function restoreOptions() {
   function setCurrentChoice(result) {
-    // document.querySelector("#downloadOption").value = result.downloadOption || "0";
-    var downloadOptionValue=result.downloadOption || 0;
+    // document.querySelector("#downloadOption").value = result.downloadOption || "2";
+    var downloadOptionValue=result.downloadOption || 2;
     if(downloadOptionValue==0){
       document.getElementById("imagesRadio").checked=true;
       ImageRadioCallBack();
@@ -55,9 +51,9 @@ function restoreOptions() {
     }
     
     document.querySelector("#appendFileNames").checked =(((result.appendFileNames==undefined)? false:true))? result.appendFileNames :false; 
-    document.querySelector("#continuesNumbering").checked =(((result.continuesNumbering==undefined)? false:true))? result.continuesNumbering :false; 
+    document.querySelector("#continuesNumbering").checked =(((result.continuesNumbering==undefined)? false:true))? result.continuesNumbering :true; 
     document.querySelector("#AppendComma").checked =(((result.AppendComma==undefined)? false:true))? result.AppendComma :false; 
-    document.querySelector("#entryOnNewLine").checked =(((result.entryOnNewLine==undefined)? false:true))? result.entryOnNewLine :false; 
+    document.querySelector("#entryOnNewLine").checked =(((result.entryOnNewLine==undefined)? false:true))? result.entryOnNewLine :true; 
   }
 
   function onError(error) {
