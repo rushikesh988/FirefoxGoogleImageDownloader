@@ -1,4 +1,4 @@
-{
+{     "background": { "scripts": ["imageDownloader.js"] },
       "manifest_version": 2,
       "name": "Google Images Downloader",
       "author": "Rushikesh Tade",
@@ -6,7 +6,7 @@
         "name": "Rushikesh Tade",
         "url": "https://github.com/rushikesh988/"
       },
-      "version": "4.0",
+      "version": "5.0",
       "description": "Downloads full sized images in Google Images.",
       "homepage_url": "https://github.com/rushikesh988/FirefoxGoogleImageDownloader",
       "icons": {
@@ -16,13 +16,19 @@
         "32": "icons/icon32.png"
       },
       
+      "options_ui": {
+        "page": "options.html",
+        "browser_style": true
+      },
+
       "permissions": [
         "activeTab",
-        "downloads"
+        "downloads",
+        "storage"
       ],
 
       "browser_action": {
-        "default_icon": "icons/icon32.png",
+        "default_icon": "icons/icon96.png",
         "default_title": "Google Image Downloader"
       },
 
@@ -30,7 +36,7 @@
         "gecko": {
            "id": "rushikesh988@gmail.com"
         }
-     },
+     }
 
-     "background": { "scripts": ["imageDownloader.js"] }
+     
     }

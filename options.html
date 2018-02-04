@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="options.css">
+  </head>
+ 
+<body> 
+  <p class="title">Settings</p>
+  <form>
+      <label>Download Type: </label><br>
+      <!-- <input type="radio" name="downloadOption" id="downloadOption"  value="0">Images<br>
+      <input type="radio" name="downloadOption" id="downloadOption"  value="1">Text File Consisting URLs<br>
+      <input type="radio" name="downloadOption" id="downloadOption"  value="2">Both<br><br> -->
+      <input type="radio" name="downloadOption" id="imagesRadio" onclick="ImageRadioCallBack()" value="0">Images<br>
+      <input type="radio" name="downloadOption" id="textRadio" onclick="TextRadioCallback()" value="1">Text File Consisting URLs<br>
+      <input type="radio" name="downloadOption" id="bothRadio" onclick="BothRadioCallBack()" value="2">Both<br><br>
+      
+      
+      <div id="image">
+      <label>Image Download Setting: </label><br>
+      <input type="checkbox" id="appendFileNames" name="appendFileNames" >Append file names while saving Images<br>
+      <input type="checkbox" id="continuesNumbering" name="continuesNumbering">Continues Numbering<br><br>
+      </div>
+
+     
+      <div id="text">
+       <label>URL Text File Download Setting: </label><br>
+        <input type="checkbox" id="AppendComma" name="AppendComma" value="1" class="image">Append comma after every Entry<br>
+        <input type="checkbox" id="entryOnNewLine"  name="entryOnNewLine" value="1" class="image">Entry on new line<br><br>
+        </div>
+      <button type="submit" class="button">Save</button>
+  </form>
+
+
+<script src="options.js"></script>
+</body>
+
+</html>
