@@ -11,8 +11,37 @@ function onStartedDownload(id) {
 function onError(error) {
   console.log(`Download failed: ${error}`);
 }
+function uniq_fast(a) {
+  var seen = {};
+  var out = [];
+  var len = a.length;
+  var j = 0;
+  for(var i = 0; i < len; i++) {
+       var item = a[i];
+       if(seen[item] !== 1) {
+             seen[item] = 1;
+             out[j++] = item;
+       }
+  }
+  return out;
+}
+function uniq(a) {
+  return Array.from(new Set(a));
+}
 
 function onLinksReceived(downloadLinks) {
+
+  
+  if (downloadLinks[0] == undefined) {
+    console.log("unable to fetch images");
+    return;
+  }
+
+  console.log("No of links before duplicate detection"+ downloadLinks[0].length)
+  downloadLinks=uniq_fast(downloadLinks[0]);
+  
+  console.log("No of links after duplicate detection"+ downloadLinks.length)
+  
   var gettingSettings = browser.storage.local.get().then(function (result) {
     var storedSettings = {
       downloadOption: 2,
@@ -30,10 +59,6 @@ function onLinksReceived(downloadLinks) {
     console.log("Using following Settings to Download in OnLinkReceivedFunction");
     console.log(storedSettings);
   
-    if (downloadLinks[0] == undefined) {
-      console.log("unable to fetch images");
-      return;
-    }
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
     var time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds();
@@ -52,29 +77,66 @@ function onLinksReceived(downloadLinks) {
    
   
     var imgURLsString = "";
-    while (++i < downloadLinks[0].length) {
-      var dashSplitString = downloadLinks[0][i].split("/");
+    while (++i < downloadLinks.length) {
+      var dashSplitString = downloadLinks[i].split("/");
       var fileNameString = dashSplitString[dashSplitString.length - 1];
-      var extensionString = fileNameString.split(".");
-      extensionString = extensionString[extensionString.length - 1];
+      // var extensionString = fileNameString.split(".");
+      // extensionString = extensionString[extensionString.length - 1];
       var fileNameToStore = "Google Images" + "/" + searchTitle + " " + dateTime + "/" + (i - j);
-      if ((extensionString == "jpg") || (extensionString == "bmp") || (extensionString == "jpeg") || (extensionString == "gif") || (extensionString == "png") || (extensionString == "ico") || (extensionString == "svg")) {
-        if (storedSettings.appendFileNames) {
+     // if ((extensionString == "jpg") || (extensionString == "bmp") || (extensionString == "jpeg") || (extensionString == "gif") || (extensionString == "png") || (extensionString == "ico") || (extensionString == "svg")) {
+     var safeExtensionString=false;
+     var extensionString="";
+     if((fileNameString.toLowerCase().includes('.jpg')))
+        {
+          safeExtensionString=true;
+          extensionString='jpg';
+        }
+        else if((fileNameString.toLowerCase().includes('.bmp')))
+        {
+          safeExtensionString=true;
+          extensionString='bmp';
+        }
+        else if((fileNameString.toLowerCase().includes('.jpeg')))
+        {
+          safeExtensionString=true;
+          extensionString='jpeg';
+        }
+        else if((fileNameString.toLowerCase().includes('.png')))
+        {
+          safeExtensionString=true;
+          extensionString='png';
+        }
+        else if((fileNameString.toLowerCase().includes('.ico')))
+        {
+          safeExtensionString=true;
+          extensionString='ico';
+        }
+        else if((fileNameString.toLowerCase().includes('.svg')))
+        {
+          safeExtensionString=true;
+          extensionString='svg';
+        }
+       
+
+   if (safeExtensionString){    
+     if (storedSettings.appendFileNames) {
           fileNameToStore = fileNameToStore + "_" + fileNameString;
         } else {
           fileNameToStore = fileNameToStore + "." + extensionString;
         }
       } else {
+        
         if (storedSettings.continuesNumbering) {
           j = j + 1;
           console.log("Using Continues Numbering: " + j + " images skipped");
+          console.log("Image path which got skipped "+downloadLinks[i]+ "\n");
         }
         continue;
       }
-      imgURLsString = imgURLsString + downloadLinks[0][i] + seperatorString;
+      imgURLsString = imgURLsString + downloadLinks[i] + seperatorString;
       if ((storedSettings.downloadOption == 0) || (storedSettings.downloadOption == 2)) {
         var downloading = browser.downloads.download({
-          url: downloadLinks[0][i],
+          url: downloadLinks[i],
           conflictAction: 'uniquify',
           filename: fileNameToStore
         });
