@@ -1,0 +1,24 @@
+html, body {
+    width: 100px;
+  }
+  
+  .button {
+    margin: 3% auto;
+    padding: 4px;
+    text-align: center;
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+  
+  .menu:hover {
+    background-color: #CFF2F2;
+  }
+  
+  .menu {
+    background-color: #E5F2F2;
+  }
+  
+  .menu {
+    background-color: #FBFBC9;
+  }
+  

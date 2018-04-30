@@ -29,7 +29,8 @@
 
       "browser_action": {
         "default_icon": "icons/icon96.png",
-        "default_title": "Google Image Downloader"
+        "default_title": "Google Image Downloader",
+        "default_popup":"popup/menu.html"
       },
 
       "applications": {
